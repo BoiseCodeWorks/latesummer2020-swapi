@@ -2,14 +2,16 @@ import Person from "./Models/Person.js";
 
 let _state = {
   /** @type {Person[]} */
-  people: []
+  people: [],
+  page: 1
 };
 
 /** Collection of listeners to be called based on keyed state changes
  * @type {{[x:string]: function[]}}
  */
 let _listeners = {
-  people: []
+  people: [],
+  page: []
 };
 
 //NOTE You should not need to change the code from this point down

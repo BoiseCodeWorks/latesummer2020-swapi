@@ -6,6 +6,14 @@ function _draw() {
   let people = store.State.people;
   let template = ""
   people.forEach(person => template += person.Template)
+  template +=/*html*/ `
+  <div class="col-12">
+    <div class="row">
+      <button class="btn btn-primary col-6" ${store.State.page < 2 ? "disabled" : ""} onclick="app.peopleController.previousPage()">Previous Page</button>
+      <button class="btn btn-primary col-6" ${store.State.people.length < 10 ? "disabled" : ""} onclick="app.peopleController.nextPage()">Next Page</button>
+    </div>
+  </div>
+  `
   document.getElementById("people").innerHTML = template
   console.log("draw ran");
 }
@@ -21,4 +29,13 @@ export default class PeopleController {
     store.subscribe("people", _greetPeople);
     _peopleService.getPeople()
   }
+
+  previousPage() {
+    _peopleService.previousPage()
+  }
+
+  nextPage() {
+    _peopleService.nextPage()
+  }
+
 }
