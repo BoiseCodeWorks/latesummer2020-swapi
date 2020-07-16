@@ -15,6 +15,14 @@
         <h1>swapi</h1>
     </header>
     <main class="container">
+        <h1>PEOPELS</h1>
+        <form onsubmit="app.peopleController.search(event)">
+            <div class="form-group">
+                <label for=""></label>
+                <input type="text" class="form-control" name="query" id="" placeholder="Search by PEOPELS Name">
+            </div>
+            <button class="btn btn-warning" type="submit">Search</button>
+        </form>
         <div class="row" id="people">
 
         </div>

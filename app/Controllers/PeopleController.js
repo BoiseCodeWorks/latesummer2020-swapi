@@ -38,4 +38,11 @@ export default class PeopleController {
     _peopleService.nextPage()
   }
 
+  search(e) {
+    e.preventDefault();
+    let query = e.target.query.value
+    _peopleService.search(query)
+    e.target.reset()
+  }
+
 }

@@ -14,6 +14,11 @@ class PeopleService {
         store.subscribe("page", this.getPeople)
     }
 
+    search(query) {
+        store.commit("query", query)
+        store.commit("page", 1)
+    }
+
     nextPage() {
         let page = store.State.page
         page++
@@ -29,13 +34,13 @@ class PeopleService {
         store.commit("page", page)
     }
 
+    // NOTE query params https://swapi.dev/api/people?page=2&hair_color=blonde
+    // /people is the end of the route we want to hit for the resource we are requesting
+    // ?page=2 this is the first query param that designates the page number
+    // &hair_color=blonde this would also pass a filter param for finding the blonde characters
+    // _api.get("people/?page=" + store.State.page + "&format=wookiee").then(res => {
     getPeople() {
-        // NOTE query params https://swapi.dev/api/people?page=2&hair_color=blonde
-        // /people is the end of the route we want to hit for the resource we are requesting
-        // ?page=2 this is the first query param that designates the page number
-        // &hair_color=blonde this would also pass a filter param for finding the blonde characters
-        // _api.get("people/?page=" + store.State.page + "&format=wookiee").then(res => {
-        _api.get("people/?page=" + store.State.page).then(res => {
+        _api.get("people/?page=" + store.State.page + "&search=" + store.State.query).then(res => {
             console.log(res.data);
             let people = res.data.results.map(rawPersonData => new Person(rawPersonData))
             _store.commit("people", people)
